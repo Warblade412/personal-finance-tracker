@@ -1,6 +1,6 @@
 # Personal Finance Tracker
 
-A resume-ready full-stack personal finance web app for tracking expenses, viewing spending dashboards, and generating cost-conscious AI spending insights with the OpenAI API.
+A full-stack personal finance web app for tracking expenses, viewing spending dashboards, and generating cost-conscious AI spending insights with the OpenAI API.
 
 ## Tech Stack
 
@@ -115,20 +115,3 @@ POST /api/insights/generate
 4. Output directory: `dist`
 5. Add `VITE_API_URL=https://your-render-api.onrender.com/api`.
 
-## Screenshots
-
-Add screenshots here after running the app locally:
-
-- Login page
-- Dashboard
-- Budget and emergency fund calculators
-- Expense table
-- AI insights card
-
-## Resume Bullets
-
-- Built a full-stack personal finance tracker with React, Vite, Express, MongoDB, and JWT authentication to support secure multi-user expense management.
-- Designed RESTful CRUD APIs for expenses with category and date-range filtering, server-side validation, and protected routes using reusable auth middleware.
-- Integrated the official OpenAI Node.js SDK to generate personalized financial insights from summarized expense, budget, and emergency fund data while keeping API usage manual, short, and cost-conscious.
-- Created a responsive dashboard with Chart.js visualizations, budget planning tools, emergency fund calculations, recent transactions, and total expense metrics.
-- Prepared the application for production deployment with separate Vercel and Render configurations, environment examples, and a clear setup/deployment README.
