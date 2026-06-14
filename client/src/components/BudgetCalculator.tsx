@@ -1,6 +1,17 @@
 import { useMemo } from "react";
+import type { BudgetInputs } from "../types";
 
-export default function BudgetCalculator({ monthlySpending, budgetInputs, onBudgetChange }) {
+type BudgetCalculatorProps = {
+  monthlySpending: number;
+  budgetInputs: BudgetInputs;
+  onBudgetChange: (inputs: BudgetInputs) => void;
+};
+
+export default function BudgetCalculator({
+  monthlySpending,
+  budgetInputs,
+  onBudgetChange
+}: BudgetCalculatorProps) {
   const budget = useMemo(() => {
     const monthlyIncome = Number(budgetInputs.income) || 0;
     const goalPercent = Number(budgetInputs.savingsGoal) || 0;
@@ -71,7 +82,12 @@ export default function BudgetCalculator({ monthlySpending, budgetInputs, onBudg
   );
 }
 
-function Result({ label, value }) {
+type ResultProps = {
+  label: string;
+  value: number;
+};
+
+function Result({ label, value }: ResultProps) {
   const isNegative = value < 0;
 
   return (

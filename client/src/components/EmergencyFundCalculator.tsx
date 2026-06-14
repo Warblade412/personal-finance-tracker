@@ -1,10 +1,17 @@
 import { useMemo } from "react";
+import type { EmergencyInputs } from "../types";
+
+type EmergencyFundCalculatorProps = {
+  estimatedMonthlyExpenses: number;
+  emergencyInputs: EmergencyInputs;
+  onEmergencyChange: (inputs: EmergencyInputs) => void;
+};
 
 export default function EmergencyFundCalculator({
   estimatedMonthlyExpenses,
   emergencyInputs,
   onEmergencyChange
-}) {
+}: EmergencyFundCalculatorProps) {
   const result = useMemo(() => {
     const expenses = Number(emergencyInputs.monthlyExpenses) || estimatedMonthlyExpenses || 0;
     const saved = Number(emergencyInputs.currentSavings) || 0;
@@ -94,7 +101,12 @@ export default function EmergencyFundCalculator({
   );
 }
 
-function Result({ label, value }) {
+type ResultProps = {
+  label: string;
+  value: number;
+};
+
+function Result({ label, value }: ResultProps) {
   return (
     <div className="result">
       <span>{label}</span>

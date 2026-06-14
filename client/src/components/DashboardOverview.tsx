@@ -1,4 +1,11 @@
-export default function DashboardOverview({ stats, averageMonthlySpend }) {
+import type { FinanceSummary } from "../types";
+
+type DashboardOverviewProps = {
+  stats: FinanceSummary;
+  averageMonthlySpend: number;
+};
+
+export default function DashboardOverview({ stats, averageMonthlySpend }: DashboardOverviewProps) {
   const topCategories = Object.entries(stats.categoryTotals)
     .sort((a, b) => b[1] - a[1])
     .slice(0, 3);

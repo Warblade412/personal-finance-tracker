@@ -13,7 +13,12 @@ ChartJS.register(ArcElement, BarElement, CategoryScale, LinearScale, Legend, Too
 
 const palette = ["#2563eb", "#16a34a", "#f59e0b", "#dc2626", "#7c3aed", "#0891b2", "#be123c", "#475569"];
 
-export default function ChartSection({ categoryTotals, monthlyTotals }) {
+type ChartSectionProps = {
+  categoryTotals: Record<string, number>;
+  monthlyTotals: Record<string, number>;
+};
+
+export default function ChartSection({ categoryTotals, monthlyTotals }: ChartSectionProps) {
   const categoryLabels = Object.keys(categoryTotals);
   const monthLabels = Object.keys(monthlyTotals).sort();
 

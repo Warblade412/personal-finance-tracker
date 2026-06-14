@@ -1,4 +1,12 @@
-export default function ExpenseTable({ expenses, onEdit, onDelete }) {
+import type { Expense } from "../types";
+
+type ExpenseTableProps = {
+  expenses: Expense[];
+  onEdit: (expense: Expense) => void;
+  onDelete: (id: string) => void;
+};
+
+export default function ExpenseTable({ expenses, onEdit, onDelete }: ExpenseTableProps) {
   return (
     <section className="panel">
       <div className="panel-heading">
@@ -38,7 +46,7 @@ export default function ExpenseTable({ expenses, onEdit, onDelete }) {
             ))}
             {expenses.length === 0 && (
               <tr>
-                <td colSpan="5" className="empty">
+                <td colSpan={5} className="empty">
                   No expenses match your filters.
                 </td>
               </tr>

@@ -1,5 +1,24 @@
-export default function InsightCard({ insight, loading, error, onGenerate }) {
-  const formattedInsight = insight ? formatInsight(insight.content) : null;
+import type { ReactNode } from "react";
+import type { Insight } from "../types";
+
+type InsightCardProps = {
+  insight: Insight | null;
+  loading: boolean;
+  error: string;
+  onGenerate: () => void;
+};
+
+type FormattedInsight = {
+  spending: string;
+  budget: string;
+  emergency: string;
+  suggestions: string[];
+};
+
+export default function InsightCard({ insight, loading, error, onGenerate }: InsightCardProps) {
+  const formattedInsight = insight
+    ? formatInsight(insight.content)
+    : { spending: "", budget: "", emergency: "", suggestions: [] };
 
   return (
     <section className="panel insight-panel">
@@ -42,7 +61,12 @@ export default function InsightCard({ insight, loading, error, onGenerate }) {
   );
 }
 
-function InsightSection({ title, text }) {
+type InsightSectionProps = {
+  title: string;
+  text: string;
+};
+
+function InsightSection({ title, text }: InsightSectionProps) {
   if (!text) return null;
 
   return (
@@ -53,7 +77,7 @@ function InsightSection({ title, text }) {
   );
 }
 
-function formatInsight(content) {
+function formatInsight(content: string): FormattedInsight {
   const normalized = content.replace(/\s+/g, " ").trim();
   const suggestionMatch = normalized.match(
     /(?:Action Suggestions?:|Two (?:simple|helpful|practical)? ?(?:ways|ideas|suggestions).*?:|2 practical saving suggestions?:|Saving suggestions?:)(.*)$/i
@@ -63,7 +87,7 @@ function formatInsight(content) {
   const sentences = mainText.match(/[^.!?]+[.!?]+/g)?.map((sentence) => sentence.trim()) || [mainText];
   const suggestions = suggestionsText
     .split(/\s*\d+[.)]\s*/)
-    .map((item) => item.replace(/^[\s:.-]+/, "").trim())
+    .map((item: string) => item.replace(/^[\s:.-]+/, "").trim())
     .filter(Boolean);
 
   return {
@@ -74,27 +98,27 @@ function formatInsight(content) {
   };
 }
 
-function stripSectionLabels(text) {
+function stripSectionLabels(text: string): string {
   return text.replace(/(?:Spending Pattern|Budget Status|Emergency Fund|Action Suggestions):/gi, "");
 }
 
-function isSpendingSentence(sentence) {
+function isSpendingSentence(sentence: string): boolean {
   return /spending|category|monthly trend|total/i.test(sentence) && !isBudgetSentence(sentence) && !isEmergencySentence(sentence);
 }
 
-function isBudgetSentence(sentence) {
+function isBudgetSentence(sentence: string): boolean {
   return /budget|income|savings goal|overspending|left after|remaining after|expenses/i.test(sentence) && !isEmergencySentence(sentence);
 }
 
-function isEmergencySentence(sentence) {
+function isEmergencySentence(sentence: string): boolean {
   return /emergency fund|emergency|saved toward|target|months to|way there|progress/i.test(sentence);
 }
 
-function emphasizeEmergencyFund(text) {
+function emphasizeEmergencyFund(text: string): string {
   return text.replace(/\bemergency fund\b/gi, "**Emergency Fund**");
 }
 
-function renderBoldText(text) {
+function renderBoldText(text: string): ReactNode[] {
   const highlightedText = text
     .replace(/\$(?:\d{1,3}(?:,\d{3})*|\d+)(?:\.\d{2})?/g, (match) => `**${match}**`)
     .replace(/\b\d+(?:\.\d+)?%/g, (match) => `**${match}**`)
