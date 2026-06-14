@@ -1,4 +1,4 @@
-# Personal Finance Tracker
+# FinSight AI
 
 A full-stack personal finance web app for tracking expenses, viewing spending dashboards, and generating cost-conscious AI spending insights with the OpenAI API.
 
